@@ -11,15 +11,16 @@ body {
 .canvas { 
   padding: 10px;
   width: 700px; 
-  height: 700px; 
+  height: 500px; 
   box-sizing: border-box;
   background-color: white; 
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  cursor: url(./img/brush.cur) 0 35, auto;
 }
 .controls {
   margin-top: 80px;
-  width: 520px;
+  width: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -55,10 +56,24 @@ body {
   display: flex;
   justify-content: space-between;
 }
+.controls__colors img { display: none;}
 .controls__colors .controls__color {
   width: 50px;
   height: 50px;
   cursor: pointer;
-  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  border-radius: 50%;
+}
+.controls__colors .controls__color:last-child { 
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-image: url(./img/colorpicker.png);
+  background-size: cover;
+}
+.controls__colors .controls__color:last-child input { 
+  opacity: 0;
+  cursor: pointer;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
 }

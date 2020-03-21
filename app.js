@@ -137,7 +137,7 @@ function handleResetClick() {
   ctx.lineWidth = 2.5;
   painting = false; 
   filling = false;
-  resetShadowStyle();
+  resetTextStyle();
 }
 if(resetBtn){
   resetBtn.addEventListener("click", handleResetClick);
@@ -145,8 +145,14 @@ if(resetBtn){
 
 
 // 캔버스에 이미지 깔기 이벤트
-function resetShadowStyle() { 
-  Array.from(cat).forEach( cat => { cat.querySelector('p').style.display = "none"});
+const text = document.querySelectorAll(".text");
+
+function addTextStyle() { 
+  Array.from(text).forEach( e => { e.classList.add("show"); });
+};
+
+function resetTextStyle() { 
+  Array.from(text).forEach( e => { e.classList.remove("show"); });
 };
 
 for( let i = 0; i < 6; i++ ){
@@ -157,8 +163,17 @@ for( let i = 0; i < 6; i++ ){
         ctx.fillStyle = ctx.createPattern(catBackground, 'no-repeat');
         ctx.fillRect(0,0, 700, 500);
       } 
-      resetShadowStyle();
-      event.target.querySelector('p').style.display = "block";     
+
+      const show = text[i].classList.contains("show");
+
+      if( show == true ){
+        // nothing
+      } else {
+        resetTextStyle();
+        text[i].classList.add("show");
+      }
     }
     cat[i].addEventListener("click", handleCatClick);
 }
+
+

@@ -147,10 +147,6 @@ if(resetBtn){
 // 캔버스에 이미지 깔기 이벤트
 const text = document.querySelectorAll(".text");
 
-function addTextStyle() { 
-  Array.from(text).forEach( e => { e.classList.add("show"); });
-};
-
 function resetTextStyle() { 
   Array.from(text).forEach( e => { e.classList.remove("show"); });
 };

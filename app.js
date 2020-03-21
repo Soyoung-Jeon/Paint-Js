@@ -4,6 +4,7 @@ const range = document.getElementById("jsRange");
 const mode = document.getElementById("jsMode");
 const saveBtn = document.getElementById("jsSave");
 const resetBtn = document.getElementById("jsReset");
+const cat = document.getElementsByClassName("cat");
 const ctx = canvas.getContext('2d');
 
 canvas.width = 700;
@@ -99,11 +100,11 @@ if(range){
 function handleModeClick() {
   if( filling == true ){
     filling = false;
-    mode.innerText = "fill";
-    canvas.style.cursor = "url(./img/brush.cur) 0 35, auto";
+    mode.innerText = "채우기";
+    canvas.style.cursor = "url(./img/brush.cur) 2 30, auto";
   } else {
     filling = true;
-    mode.innerText = "brush";
+    mode.innerText = "그리기";
     canvas.style.cursor = "url(./img/fill.cur) 0 0, auto";
   }
 }
@@ -127,14 +128,37 @@ if(saveBtn){
 
 // 리셋버튼 이벤트
 function handleResetClick() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = "white";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.strokeStyle = defaultColor;
   ctx.fillStyle = defaultColor;
+  range.value = 2.5;
   ctx.lineWidth = 2.5;
   painting = false; 
   filling = false;
+  resetShadowStyle();
 }
 if(resetBtn){
   resetBtn.addEventListener("click", handleResetClick);
+}
+
+
+// 캔버스에 이미지 깔기 이벤트
+function resetShadowStyle() { 
+  Array.from(cat).forEach( cat => { cat.querySelector('p').style.display = "none"});
+};
+
+for( let i = 0; i < 6; i++ ){
+    function handleCatClick(event){
+      const catBackground = new Image();
+      catBackground.src = `./img/canvas_0${i+1}.png`;
+      catBackground.onload = function(){
+        ctx.fillStyle = ctx.createPattern(catBackground, 'no-repeat');
+        ctx.fillRect(0,0, 700, 500);
+      } 
+      resetShadowStyle();
+      event.target.querySelector('p').style.display = "block";     
+    }
+    cat[i].addEventListener("click", handleCatClick);
 }
